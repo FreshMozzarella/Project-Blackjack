@@ -16,11 +16,12 @@ Skills demonstration for my coding bootcamp
 [Link to pdf explaining the rules](assets/other/Rules-for-Basic-Blackjack.pdf)
 
 ## TODO
-
 * Luigi rises from the board animation
 * Golf clap audio when you do well or win
 * Luigi stock sound effects 
 * A coin betting system
+* Insurance buying and betting system
+* pay ratio 3 to 2 for bets
 
 
 <!-- A README.md file with these sections:
