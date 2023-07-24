@@ -1,28 +1,27 @@
-# Project-Blackjack
-Skills demonstration for my coding bootcamp
-## Gameplay-Screenshots, etc.
+## Student: Alec Taylor
 
-## Key Resources
+# Description
+    The goal of slots is fairly simple: match all three symbols to get a higher payout. For now, I have yet to add a betting mechanic
 
-## Technologies Used
+***
+## History of slot machines
+Slots were first founded by a New York company. The first machines used playing cards and were found at bars. There was no payout system--people usually were given free drinks and cigars
+* [More info](https://www.online-casinos.com/slots/history/)
+## Screenshots
+* [Wireframe](assets/imgs/Wirerame_2.png)
+## Technologies used
 * HTML
 * CSS
-* Javascript
 * Bootstrap
+* Javascript
 
 ## Getting Started
+[Link to the game]()
 
-### Rules of Blackjack
-[Link to pdf explaining the rules](assets/other/Rules-for-Basic-Blackjack.pdf)
+## Next Steps
 
-## TODO
-* Luigi rises from the board animation
-* Golf clap audio when you do well or win
-* Luigi stock sound effects 
-* A coin betting system
-* Insurance buying and betting system
-* pay ratio 3 to 2 for bets
-
+* add a betting mechanic. Player starts with 500$
+* add smoother CSS animations 
 
 <!-- A README.md file with these sections:
 

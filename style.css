@@ -1,0 +1,58 @@
+@font-face {
+    font-family: Delicious;
+    src: url('assets/other/ALBAS___.TTF')
+}
+
+* {
+    font-family: Delicious;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.slot-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    text-align: center;
+}
+
+.container-buttons {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.bet-increase {
+    grid-area: 1 / 1 / 3 / 4;
+}
+
+.bet-decrease {
+    grid-area: 3 / 1 / 5 / 4;
+}
+
+.spinBtn {
+    grid-area: 1 / 4 / 5 / 7;
+}
+
+.total {
+    grid-area: 1 / 7 / 5 / 10;
+}
+
+.alert {
+    text-align: center;
+    grid-area: 6 / 1 / 8 / 10;
+}
+
+img {
+    max-width: 66%;
+    margin: auto;
+}
+
+.hidden {
+    display: none;
+}
