@@ -16,7 +16,8 @@ Slots were first founded by a New York company. The first machines used playing 
 * Javascript
 
 ## Getting Started
-[Link to the game]()
+* [Link to the game]()
+* [How do paylines work?](https://www.winkslots.com/blog/slots-paylines/)
 
 ## Next Steps
 
