@@ -1,12 +1,13 @@
 /*----- constants -----*/
-const symbols = ['🍒', '🍋', '🍉', '🍇', 'ッ', ' 𓁳 ', '🌹', '🍪', '💎', '𝟕']
+const symbols = ['🍒','🍇', 'ッ', '💎', '𝟕']
 const AUDIO = new Audio('assets/other/SSBM.mp3')
 /*----- state variables -----*/
 let initialMoney = 500
 let betIncrement = 0;
-
+isPlaying = false;
 // betIncrement - 0$ gets charged -5$ for spinning the basic reel, 1- 5$-5$, 2- 5$-$20, 3- 5$- 40$ 
 /*----- cached elements  -----*/
+
 const increaseBtn = document.querySelector('.bet-increase')
 const decreaseBtn = document.querySelector('.bet-decrease')
 const totalMoney = document.querySelector('.total-amount')
@@ -24,41 +25,68 @@ const spinBtn = document.querySelector('.spinBtn')
 const textWindow = document.querySelector('.alert')
 const slotWindow = document.querySelector('.slot-container')
 const delay = ms => new Promise(res => setTimeout(res, ms));
-decreaseBtn.setAttribute('disabled', '')
+const cancelBtn = document.querySelector('.btn-cancel');
+const submitBtn = document.querySelector('.btn-submit');
+const modal = document.querySelector('.modal')
+const overlay = document.querySelector('.overlay')
 /*----- event listeners -----*/
+cancelBtn.addEventListener('click', closeModal)
+submitBtn.addEventListener('click', () =>{
+  init();
+})
 increaseBtn.addEventListener('click', () => {
-  betIncrement++
-  decreaseBtn.removeAttribute('disabled')
-  if(betIncrement === 1){totalMoney.innerText = parseInt(`${totalMoney.innerText}`) - 5;
-console.log('betting 5$')}else if (betIncrement === 2) {totalMoney.innerText = parseInt(`${totalMoney.innerText}`) - 20
-console.log('betting 20$')} else if (betIncrement === 3){
-    console.log('betting 20$')
-    totalMoney.innerText = parseInt(`${totalMoney.innerText}`) - 40;
-    // increaseBtn.innerText = 'MAX BET'
-    console.log('betting 40$')
-    increaseBtn.setAttribute('disabled', '')
-    
-    textWindow.innerText = 'you reached the max bet'
-    console.log('alert window deployed')
-    
-      }
-
+      
+     if (betIncrement === 0){
+      if (parseInt(`${totalMoney.innerText}`) < 5){
+        textWindow.innerText = "You don't have enough money"
+        return;
+      } else
+      totalMoney.innerText = parseInt(`${totalMoney.innerText}`) - 5;
+      console.log('betting 5$');
+      betIncrement++;
+      decreaseBtn.removeAttribute('disabled');
+     } 
+     else if (betIncrement === 1){
+      if (parseInt(`${totalMoney.innerText}`) < 20){
+        textWindow.innerText = "You don't have enough money"
+        return;
+      } else
+      totalMoney.innerText = parseInt(`${totalMoney.innerText}`) - 20;
+      console.log('betting 20$');
+      betIncrement++
+     }
+     else if(betIncrement === 2){
+      if (parseInt(`${totalMoney.innerText}`) < 40){
+        textWindow.innerText = "You don't have enough money"
+        return;
+      } else
+      totalMoney.innerText = parseInt(`${totalMoney.innerText}`) - 40;
+      console.log('betting 40$. Max bet!');
+      betIncrement++;
+      increaseBtn.setAttribute('disabled', '');
+     }
+     else return 'CRITICAL ERROR' 
+     console.log(parseInt(`${totalMoney.innerText}`))
     })
 decreaseBtn.addEventListener('click', () => {
+if (betIncrement === 3) { 
+  totalMoney.innerText = parseInt(`${totalMoney.innerText}`) + 40;
+  console.log('decreasing bet by 40$');
+  betIncrement--;
+  increaseBtn.removeAttribute('disabled');
+} 
+else if (betIncrement === 2) {
+  totalMoney.innerText = parseInt(`${totalMoney.innerText}`) + 20;
+  console.log('decreasing bet by 20$');
   betIncrement--
-  if(betIncrement === 1) {
-    totalMoney.innerText = parseInt(`${totalMoney.innerText}`) + 5
-  console.log('decreasing bet by 5$')} 
-  else if (betIncrement === 2) {
-    totalMoney.innerText = parseInt(`${totalMoney.innerText}`) + 20;
-    console.log('decreasing bet by 20$')
-  } else if (betIncrement === 3) {
-    totalMoney.innerText = parseInt(`${totalMoney.innerText}`) + 40;
-    console.log('decreasing bet by 40$')
-    textWindow.innerText = "Can't go any lower"
-    decreaseBtn.setAttribute('disabled', '')
-    increaseBtn.removeAttribute('disabled')
-  }
+} 
+else if(betIncrement === 1){
+  totalMoney.innerText = parseInt(`${totalMoney.innerText}`) + 5
+  console.log('decreasing bet by 5$');
+  betIncrement--;
+  textWindow.innerText = "Can't go any lower"
+  decreaseBtn.setAttribute('disabled', '')
+} else return 'CRITICAL ERROR'
 })
 spinBtn.addEventListener('click', evalSlots)
 musicBtn.addEventListener('click', function togglePlay() {
@@ -75,6 +103,7 @@ AUDIO.onpause = function () {
 
 /*----- functions -----*/
 function spinSlots() {
+  totalMoney.innerText = parseInt(`${totalMoney.innerText}`) - 5;
   console.log('spinning slots!')
   setTimeout(() => firstSlot.innerText = rdmIdx(), Math.floor(Math.random() * 3000));
   setTimeout(() => secondSlot.innerText = rdmIdx(), Math.floor(Math.random() * 3000));
@@ -85,46 +114,76 @@ function spinSlots() {
   setTimeout(() => seventhSlot.innerText = rdmIdx(), Math.floor(Math.random() * 3000));
   setTimeout(() => eighthSlot.innerText = rdmIdx(), Math.floor(Math.random() * 3000));
   setTimeout(() => ninthSlot.innerText = rdmIdx(), Math.floor(Math.random() * 3000));
-  totalMoney.innerText = parseInt(`${totalMoney.innerText}`) - 5;
 }
 async function evalSlots() {
-  spinSlots()
-   await delay(8000);
-   console.log('waited for 8 seconds')
+    spinSlots()
+    await delay(5000);
+   console.log('waited for 4 seconds')
     if (betIncrement === 0) {
       console.log('checking bet increment and comparing to tests')
+      console.log(betIncrement)
        basicHorizontalTest();
     } else if (betIncrement === 1) {
       console.log('checking bet increment and comparing to all horizontal tests')
+      console.log(betIncrement)
         basicHorizontalTest();
        allHorizontalTest();
     } else if (betIncrement === 2){
       console.log('checking for all vertical, horizontal, and basic tests')
+      console.log(betIncrement)
       basicHorizontalTest();
       allHorizontalTest();
       verticalTest();
     } else if (betIncrement === 3){
       console.log('performing all available tests')
+      console.log(betIncrement)
       basicHorizontalTest();
       allHorizontalTest();
       verticalTest();
       diagonalTest();
-    } 
-  render()
+    }
+    render(); 
 };
 
 function init() {
   console.log('initializing')
   totalMoney.innerText = '500'
-  // render()
+  betIncrement = 0;
+ render()
 }
 function render() {
   console.log('rendering data')
+  decreaseBtn.setAttribute('disabled', '')
+  increaseBtn.removeAttribute('disabled')
   betIncrement = 0;
+  renderGameOver();
+  // renderSlots();
   // while (slotWindow.firstChild) {
   //   slotWindow.removeChild(slotWindow.firstChild)
   // }
 }
+function renderGameOver() {
+setInterval(() => {
+  if(parseInt(`${totalMoney.innerText}`) <= 5){
+    openModal();
+    clearInterval() 
+   }
+}, 100); // else
+  // totalMoney.innerText = '500'
+}
+
+function renderSlots(){
+firstSlot.innerText = ''
+secondSlot.innerText = ''
+thirdSlot.innerText = ''
+fourthSlot.innerText = ''
+fifthSlot.innerText = ''
+sixthSlot.innerText = ''
+seventhSlot.innerText = ''
+eighthSlot.innerText = ''
+ninthSlot.innerText = ''
+}
+
 
 function rdmIdx() {
   return symbols[Math.floor(Math.random() * symbols.length)]
@@ -139,7 +198,7 @@ function basicHorizontalTest() {
 }
 
 function allHorizontalTest() {
-  if ((firstSlot.innerText === secondSlot.innerText && secondSlot === thirdSlot.innerText) || (fourthSlot.innerText === fifthSlot.innerText && fifthSlot.innerText === sixthSlot.innerText) || (seventhSlot.innerText === eighthSlot.innerText && eighthSlot.innerText === ninthSlot.innerText)) {
+  if ((firstSlot.innerText === secondSlot.innerText && secondSlot.innerText === thirdSlot.innerText) || (fourthSlot.innerText === fifthSlot.innerText && fifthSlot.innerText === sixthSlot.innerText) || (seventhSlot.innerText === eighthSlot.innerText && eighthSlot.innerText === ninthSlot.innerText)) {
     console.log('test passed!, heres some money!')
     totalMoney.innerText = parseInt(`${totalMoney.innerText}`) + 200
     return true // add paytable values here
@@ -160,9 +219,13 @@ function diagonalTest() {
   }
 }
 
-init();
-function compareTest() {
-  console.log(seventhSlot.innerText)
-  return fourthSlot.innerText === thirdSlot.innerText
+function closeModal() {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
 }
-console.log(compareTest())
+function openModal() {
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+}
+
+ init();

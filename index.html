@@ -9,33 +9,47 @@
     <script src="main.js" defer></script>
 </head>
 
-<body>
 
-    <body>
-        <div class="container"> <!--Flex-col-->
-            <img src="assets/imgs/luigi.jpg" alt="Luigi">
-            <div class="slot-container">
-                <div class="slot1"></div>
-                <div class="slot2"></div>
-                <div class="slot3"></div>
-                <div class="slot4"></div>
-                <div class="slot5"></div>
-                <div class="slot6"></div>
-                <div class="slot7"></div>
-                <div class="slot8"></div>
-                <div class="slot9"></div>
-            </div>
-            <div >Bet amount: <span class="bet-amount"></span></div>
-            <div class="container-buttons"> <!--Grid-->
-                <button class="bet-increase">Increase Bet</button>
-                <button class="bet-decrease">Decrease Bet</button>
-                <button class="spinBtn">Spin = 5$</button>
-                <button class="total">Total Money: $<span class="total-amount"></span></button>
-                <div class="alert">Alert-Window</div>
-            </div>
-            <button class="music">Play a banger</button>
+
+<body>
+    <div class="container"> <!--Flex-col-->
+        <img src="assets/imgs/luigi.jpg" alt="Luigi">
+        <div class="slot-container">
+            <div class="slot1"></div>
+            <div class="slot2"></div>
+            <div class="slot3"></div>
+            <div class="slot4"></div>
+            <div class="slot5"></div>
+            <div class="slot6"></div>
+            <div class="slot7"></div>
+            <div class="slot8"></div>
+            <div class="slot9"></div>
         </div>
-    </body>
+        <div>Bet amount: <span class="bet-amount"></span></div>
+        <div class="container-buttons"> <!--Grid-->
+            <button class="bet-increase">Increase Bet</button>
+            <button class="bet-decrease">Decrease Bet</button>
+            <button class="spinBtn">Spin = 5$</button>
+            <button class="total">Total Money: $<span class="total-amount"></span></button>
+            <div class="alert">Alert-Window</div>
+        </div>
+        <button class="music">Play a banger</button>
+    </div>
+        <!--Modal Itself-->
+  <section class="modal hidden">
+    <div class="flex">
+      <button class="btn-close">X</button> <!--add event listener here and use a close modal function-->
+    </div>
+    <div>
+      <h3></h3><!-- add function to insert text into innertText to display if user has won or not-->
+      <p>Try again?</p>
+    </div>
+    <button class="btn-cancel">Nah</button><!--event listener to close modal as well-->
+    <button class="btn-submit">Sure</button> <!--changed class here as well. An event listener attached here will close and reset the game-->
+    
+  </section>  
+   <div class="overlay hidden"></div> 
 </body>
+
 
 </html>
