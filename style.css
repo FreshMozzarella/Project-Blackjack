@@ -5,6 +5,7 @@
 
 * {
     font-family: Delicious;
+    font-size: 20px;
 }
 
 .container {
@@ -29,6 +30,7 @@
     justify-self: center;
     text-align: center;
     width: 100px;
+    font-size: 45px;
 }
 
 .container-buttons {
