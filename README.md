@@ -23,6 +23,8 @@ Slots were first founded by a New York company. The first machines used playing 
 
 * add a betting mechanic. Player starts with 500$
 * add smoother CSS animations 
+* add spinning animations
+* add more ways to bet and win!
 
 <!-- A README.md file with these sections:
 

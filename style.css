@@ -2,7 +2,12 @@
     font-family: Delicious;
     src: url('assets/other/ALBAS___.TTF')
 }
-
+body {
+    background: url('assets/imgs/casino.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 * {
     font-family: Delicious;
     font-size: 20px;
@@ -21,16 +26,20 @@
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 10px;
     justify-content: stretch;
-    border: 2px solid red;
-    height: 200px;
+    border: 5px solid salmon;
+    height: 300px;
+    border-radius: 15px;
+    background: #F3F4F0;
 }
 
 .slot-container>div {
+    background-color: white;
     align-self: center;
     justify-self: center;
     text-align: center;
     width: 100px;
     font-size: 45px;
+    border-radius: 20%;
 }
 
 .container-buttons {
@@ -39,7 +48,8 @@
     grid-template-rows: repeat(7, 1fr);
     grid-column-gap: 15px;
     grid-row-gap: 15px;
-
+    background: hsla(213, 100%, 81%, 1);
+    border-radius: 10% 10% / 50% 50%;
 }
 
 .bet-increase {
@@ -122,8 +132,9 @@ img {
 }
 
 .bet-increase,
-.bet-decrease {
-    
+.bet-decrease, .spinBtn {
+    cursor: pointer;
+    box-shadow: 7.0px 13.9px 13.9px hsl(0deg 0% 0% / 0.28);
     border: none;
     font-size: 1em;
     position: relative;
