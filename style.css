@@ -10,37 +10,67 @@
 .container {
     display: flex;
     flex-direction: column;
+    max-width: 1000px;
+    margin: auto;
 }
 
 .slot-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    justify-content: stretch;
+    border: 2px solid red;
+    height: 200px;
+}
+
+.slot-container>div {
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    width: 100px;
 }
 
 .container-buttons {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(7, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+
 }
 
 .bet-increase {
     grid-area: 1 / 1 / 3 / 4;
+    height: 75px;
+    width: 200px;
+    justify-self: center;
+    border-radius: 26px 10px 12px;
 }
 
 .bet-decrease {
     grid-area: 3 / 1 / 5 / 4;
+    height: 75px;
+    width: 200px;
+    justify-self: center;
+    border-radius: 5px 24px 120px;
 }
 
 .spinBtn {
     grid-area: 1 / 4 / 5 / 7;
+    width: 300px;
+    height: 100px;
+    justify-self: center;
+    align-self: center;
+    border-radius: 15px;
 }
 
 .total {
     grid-area: 1 / 7 / 5 / 10;
+    clip-path: polygon(78% 22%, 100% 53%, 100% 100%, 0 100%, 0 22%);
+    justify-self: center;
+    width: 200px;
+    border: none;
 }
 
 .alert {
@@ -49,7 +79,7 @@
 }
 
 img {
-    max-width: 66%;
+    max-height: 200px;
     margin: auto;
 }
 
@@ -59,12 +89,13 @@ img {
     bottom: 0;
     left: 0;
     right: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1;
 }
+
 .modal {
     display: flex;
     flex-direction: column;
@@ -78,6 +109,69 @@ img {
     border: 1px solid gray;
     border-radius: 15px;
 }
+
 .hidden {
     display: none;
 }
+
+.music {
+    width: 200px;
+    margin: auto;
+}
+
+.bet-increase,
+.bet-decrease {
+    
+    border: none;
+    font-size: 1em;
+    position: relative;
+    color: white;
+    background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
+    background-size: 400%;
+    background-position: 0% 0%;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 26px;
+        background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
+        background-size: 500%;
+        background-position: 0% 0%;
+        filter: blur(10px);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.2s;
+    }
+
+    &:hover {
+        animation: gradientRotate 2s infinite;
+
+        &::before {
+            opacity: 1;
+            animation: gradientRotate 2s infinite;
+        }
+    }
+
+    &:active {
+        color: #c3c4d5;
+    }
+
+    &:focus {
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes gradientRotate {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }

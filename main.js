@@ -38,7 +38,8 @@ const cancelBtn = document.querySelector('.btn-cancel');
 const submitBtn = document.querySelector('.btn-submit');
 const modal = document.querySelector('.modal')
 const overlay = document.querySelector('.overlay')
-
+const modalTextBox = document.querySelector('.textbox')
+const betDisplay = document.querySelector('.bet-amount')
 /*----- event listeners -----*/
 
 cancelBtn.addEventListener('click', closeModal)
@@ -192,17 +193,17 @@ function renderGameOver() {
   }
 }
 
-function renderSlots(){
-firstSlot.innerText = ''
-secondSlot.innerText = ''
-thirdSlot.innerText = ''
-fourthSlot.innerText = ''
-fifthSlot.innerText = ''
-sixthSlot.innerText = ''
-seventhSlot.innerText = ''
-eighthSlot.innerText = ''
-ninthSlot.innerText = ''
-}
+// function renderSlots(){
+// firstSlot.innerText = ''
+// secondSlot.innerText = ''
+// thirdSlot.innerText = ''
+// fourthSlot.innerText = ''
+// fifthSlot.innerText = ''
+// sixthSlot.innerText = ''
+// seventhSlot.innerText = ''
+// eighthSlot.innerText = ''
+// ninthSlot.innerText = ''
+// }
 
 
 function rdmIdx() {
@@ -252,13 +253,18 @@ function closeModal() {
   overlay.classList.add('hidden');
 }
 function openModal() {
+  if (currentMoney >= 2000){
+    modalTextBox.innerText = "You are rich! Go home!"
+  } else {
+    modalTextBox.innerText = 'You ran out of money. Game over!'
+  }
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
 }
 
-function checkPayout(){
-  let payAmount = 0;
-  if (){}
-}
+// function checkPayout(){
+//   let payAmount = 0;
+//   if (){}
+// }
 
  init();
