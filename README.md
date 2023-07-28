@@ -22,7 +22,7 @@ Slots were first founded by a New York company. The first machines used playing 
 * [How do paylines work?](https://www.winkslots.com/blog/slots-paylines/)
 *   click on the increase/ decrease bet to increase your bets- first bet is 5, then 20, then 40
 * spinning the button also charges you 5$
-
+* Unlike real slots, each slot column or reel is generated randomly, meaning there is no pattern
 | Symbol       | Payout          
 | ------------- |:-------------:|
 | 🍒      | 100 |

@@ -14,8 +14,7 @@ let initialMoney = 500;
 let betIncrement = 0;
 let currentMoney;
 isPlaying = false;
-
-// betIncrement - 0$ gets charged -5$ for spinning the basic reel, 1- 5$-5$, 2- 5$-$20, 3- 5$- 40$ 
+ 
 /*----- cached elements  -----*/
 
 const increaseBtn = document.querySelector('.bet-increase')
@@ -275,7 +274,7 @@ function openModal() {
 
 function make2D() {
   currentMoney -= 5
-  totalMoney.innerText = `${currentMoney}`;
+  totalMoney.innerText = `${currentMoney}`;// betIncrement - 0$ gets charged -5$ for spinning the basic reel, 1- 5$-5$, 2- 5$-$20, 3- 5$- 40$
   textWindow.innerText = 'Spinning!'
   for (i = 0; i < 3; i++) {
     slots[i] = [];
