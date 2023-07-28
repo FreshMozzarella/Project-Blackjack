@@ -26,11 +26,11 @@ Slots were first founded by a New York company. The first machines used playing 
 
 | Symbol       | Payout          
 | ------------- |:-------------:|
-| 🍒      | 100 |
-| 🍇      | 250      |
-| ッ | 500      |
-| 💎 | 1000     |
-| 𝟕 | 2000      |
+| 🍒      | 100$ |
+| 🍇      | 250$      |
+| ッ | 500$      |
+| 💎 | 1000$     |
+| 𝟕 | 2000$      |
 ## Next Steps
 
 * add a betting mechanic. Player starts with 500$
