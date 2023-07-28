@@ -6,7 +6,7 @@ body {
     background: url('assets/imgs/casino.jpg');
     background-size: auto;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
 }
 * {
     font-family: Delicious;
@@ -32,8 +32,8 @@ body {
     background: #F3F4F0;
 }
 
-.slot-container>div {
-    background-color: white;
+.slot-container > div {
+    background-color: gray;
     align-self: center;
     justify-self: center;
     text-align: center;

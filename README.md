@@ -16,7 +16,7 @@ Slots were first founded by a New York company. The first machines used playing 
 * Javascript
 
 ## Getting Started
-* [Link to the game]()
+* [Link to the game](https://freshmozzarella.github.io/Project_Slot_Machine/)
 * [How do paylines work?](https://www.winkslots.com/blog/slots-paylines/)
 
 ## Next Steps
@@ -24,6 +24,7 @@ Slots were first founded by a New York company. The first machines used playing 
 * add a betting mechanic. Player starts with 500$
 * add smoother CSS animations 
 * add spinning animations
+* add a more mobile UI layout 
 * add more ways to bet and win!
 
 <!-- A README.md file with these sections:

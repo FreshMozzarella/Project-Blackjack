@@ -56,7 +56,7 @@ increaseBtn.addEventListener('click', () => {
     } else
       currentMoney -= 5
     totalMoney.innerText = `${currentMoney}`;
-    textWindow.innerText = 'you bet 5$';
+    textWindow.innerText = 'you bet 5$ - all horizontal paylines';
     betIncrement++;
     decreaseBtn.removeAttribute('disabled');
   }
@@ -67,7 +67,7 @@ increaseBtn.addEventListener('click', () => {
     } else
       currentMoney -= 20
     totalMoney.innerText = `${currentMoney}`;
-    textWindow.innerText = 'you bet 20$';
+    textWindow.innerText = 'you bet 20$ - all horizontal & vertical paylines';
     betIncrement++
   }
   else if (betIncrement === 2) {
@@ -77,7 +77,7 @@ increaseBtn.addEventListener('click', () => {
     } else
       currentMoney -= 40
     totalMoney.innerText = `${currentMoney}`;
-    textWindow.innerText = 'you bet 40$ Max Bet!';
+    textWindow.innerText = 'you bet 40$ Max Bet! - all horizontal, vertical, diagonal paylines';
     betIncrement++;
     increaseBtn.setAttribute('disabled', '');
   }
@@ -87,20 +87,19 @@ decreaseBtn.addEventListener('click', () => {
   if (betIncrement === 3) {
     currentMoney += 40
     totalMoney.innerText = `${currentMoney}`
-    console.log('decreasing bet by 40$');
+    textWindow.innerText = 'decreasing bet';
     betIncrement--;
     increaseBtn.removeAttribute('disabled');
   }
   else if (betIncrement === 2) {
     currentMoney += 20
     totalMoney.innerText = `${currentMoney}`
-    console.log('decreasing bet by 20$');
+    textWindow.innerText = 'decreasing bet';
     betIncrement--
   }
   else if (betIncrement === 1) {
     currentMoney += 5
     totalMoney.innerText = `${currentMoney}`
-    console.log('decreasing bet by 5$');
     betIncrement--;
     textWindow.innerText = "Can't go any lower"
     decreaseBtn.setAttribute('disabled', '')
@@ -175,6 +174,14 @@ function evalSlots() {
       return result4;
     }}
 };
+function spinning(){
+  slotDivEls.classList.add('hidden')
+  slotDivEls.setAttribute('id','isSpinning')
+  setTimeout(() =>{
+    slotDivEls.classList.remove('hidden')
+    slotDivEls.removeAttribute('id')
+  },4000)
+}
 
 function init() {
   console.log('initializing')
