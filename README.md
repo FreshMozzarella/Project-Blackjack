@@ -1,9 +1,9 @@
 ## Student: Alec Taylor
 
 # Description
-    1. The goal of slots is fairly simple: match all three symbols. By increasing your bet, you add 'paylines' or different combinations of ways you can win (if i have a vertical payline it would allow me to win any sequential vertical combinations). 
-    2. Once you decide on how many paylines you wish to add, the player hits the spin button and the slots 'spin' and the results are displayed on the screen.
-    3. If the player runs out of money, it is game over. If the player manages to reach 5000$, they are rich and the game is also ended. 
+1. The goal of slots is fairly simple: match all three symbols. By increasing your bet, you add 'paylines' or different combinations of ways you can win (if i have a vertical payline it would allow me to win any sequential vertical combinations). 
+2. Once you decide on how many paylines you wish to add, the player hits the spin button and the slots 'spin' and the results are displayed on the screen.
+3. If the player runs out of money, it is game over. If the player manages to reach 5000$, they are rich and the game is also ended. 
 
 ***
 ## History of slot machines
