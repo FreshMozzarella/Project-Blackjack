@@ -1,7 +1,9 @@
 ## Student: Alec Taylor
 
 # Description
-    The goal of slots is fairly simple: match all three symbols to get a higher payout. For now, I have yet to add a betting mechanic
+    1. The goal of slots is fairly simple: match all three symbols. By increasing your bet, you add 'paylines' or different combinations of ways you can win (if i have a vertical payline it would allow me to win any sequential vertical combinations). 
+    2. Once you decide on how many paylines you wish to add, the player hits the spin button and the slots 'spin' and the results are displayed on the screen.
+    3. If the player runs out of money, it is game over. If the player manages to reach 5000$, they are rich and the game is also ended. 
 
 ***
 ## History of slot machines
@@ -9,16 +11,25 @@ Slots were first founded by a New York company. The first machines used playing 
 * [More info](https://www.online-casinos.com/slots/history/)
 ## Screenshots
 * [Wireframe](assets/imgs/Wirerame_2.png)
+* [working game]()
 ## Technologies used
 * HTML
 * CSS
-* Bootstrap
 * Javascript
 
 ## Getting Started
 * [Link to the game](https://freshmozzarella.github.io/Project_Slot_Machine/)
 * [How do paylines work?](https://www.winkslots.com/blog/slots-paylines/)
+*   click on the increase/ decrease bet to increase your bets- first bet is 5, then 20, then 40
+* spinning the button also charges you 5$
 
+| Symbol       | Payout          
+| ------------- |:-------------:|
+| 🍒      | 100 |
+| 🍇      | 250      |
+| ッ | 500      |
+| 💎 | 1000     |
+| 𝟕 | 2000      |
 ## Next Steps
 
 * add a betting mechanic. Player starts with 500$
@@ -26,6 +37,7 @@ Slots were first founded by a New York company. The first machines used playing 
 * add spinning animations
 * add a more mobile UI layout 
 * add more ways to bet and win!
+* payout table on game
 
 <!-- A README.md file with these sections:
 
