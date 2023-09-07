@@ -5,55 +5,59 @@ let betIndex = 0;
 let bet = 1;
 let coins = 100;
 let isSpinning = false;
-const MAX_BET = 10;
-const MIN_BET = 1;
-const AUDIO = new Audio('assets/other/SSBM.mp3')
+const AUDIO = new Audio('assets/other/SSBM.mp3');
 AUDIO.volume = 0.2;
+const SYMBOLS = ['🍒', '🍋', '🍊', '🍉', '🍇', '🍓', '🍍', '🥝', '💎', '7️⃣'];
+let slotIndex = 1;
+
 /*----- cached element references -----*/
-const slotEls = Array.from(document.querySelectorAll('.slot')); 
 const betEl = document.querySelector(".spinBtn");
 const coinsEl = document.querySelector(".total-amount");
 const musicButton = document.querySelector(".music");
 const decreaseBetBtn = document.querySelector(".bet-decrease");
 const increaseBetBtn = document.querySelector(".bet-increase");
 const spinBtn = document.querySelector(".spinBtn");
-
+const columns = document.querySelectorAll('.door .column'); 
 /*----- event listeners -----*/
 decreaseBetBtn.addEventListener("click", decreaseBet);
 increaseBetBtn.addEventListener("click", increaseBet);
 spinBtn.addEventListener("click", spin);
-spinBtn.addEventListener("click", function() {
-  let slots = document.querySelectorAll(".slot");
-  slots.forEach(slot => slot.classList.add("spin"));
-
-  
-  setTimeout(() => {
-      slots.forEach(slot => slot.classList.remove("spin"));
-  }, 5000);  
-});
 musicButton.addEventListener("click", toggleAudioPlayback);
-/*----- functions -----*/
-function init() {
-  slot1 = slot2 = slot3 = "🍒";
-  slot4 = slot5 = slot6 = "🍒";
-  slot7 = slot8 = slot9 = "🍒";
-    render();
-    updateDisplay();
-}
-function updateDisplay() {
 
+/*----- functions -----*/
+
+function init() {
+  let slotCounter = 1;
+  columns.forEach(column => {
+      const slot = column.querySelector(`.slot.slot${slotCounter}`);
+      const slotDup = column.querySelector(`.slot.slot${slotCounter}-dup`);
+      
+      if (slot && slotDup) {
+          window[`slot${slotCounter}`] = "🍒";
+          slot.textContent = window[`slot${slotCounter}`];
+          slotDup.textContent = window[`slot${slotCounter}`];  // Initialize duplicate slot
+      } else {
+          console.error(`Slot ${slotCounter} or its duplicate not found!`);
+      }
+      
+      slotCounter++;
+  });
+  
+  render();
+  updateDisplay();
+}
+
+function updateDisplay() {
   betEl.innerText = "Spin = " + bet + "$";
   coinsEl.innerText = coins;
-  spinBtn.disabled = coins < bet;
+  spinBtn.disabled = coins < bet || (coins === 0);
 }
+
 function decreaseBet() {
   if (betIndex === 0) return;
   betIndex--;
   bet = betAmounts[betIndex];
-
- 
   updateBetButtonStates();
-
   render();
 }
 
@@ -61,98 +65,91 @@ function increaseBet() {
   if (betIndex === betAmounts.length - 1) return;
   betIndex++;
   bet = betAmounts[betIndex];
-
- 
   updateBetButtonStates();
-
   render();
 }
 
 function spin() {
-  
-  if (isSpinning || spinBtn.disabled) return; 
-
-  if (coins < bet) {
-      alert("Not enough coins to spin!");
-      return;
-  }
-
-  // Mark the start of the spinning
+  console.log("Start Spin", slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9);
+   
+  if (isSpinning || spinBtn.disabled) return;
   isSpinning = true;
   spinBtn.disabled = true;
 
+  columns.forEach(column => {
+    let slotCounter = 1;
+    while (true) {
+        const slot = column.querySelector(`.slot.slot${slotCounter}`);
+        const slotDup = column.querySelector(`.slot.slot${slotCounter}-dup`);
+        
+        if (!slot && !slotDup) break; // exit the loop if neither slot nor slotDup is found
+
+        if (slot) slot.classList.add('spin-animation');
+        if (slotDup) slotDup.classList.add('spin-animation');
+        
+        slotCounter++;
+    }
+  });
+
   setTimeout(() => {
-      // Determine the random values for the slots
-      slot1 = getRandomValue();
-      slot4 = getRandomValue();
-      slot7 = getRandomValue();
-      slot2 = getRandomValue();
-      slot5 = getRandomValue();
-      slot8 = getRandomValue();
-      slot3 = getRandomValue();
-      slot6 = getRandomValue();
-      slot9 = getRandomValue();
-  
+      columns.forEach(column => {
+          const slot = column.querySelector('.slot');
+          const slotDup = column.querySelector('.slot-dup');
 
-      // Deduct the bet amount from the player's coins
-      coins -= bet;
+          if (slot) {
+              slot.classList.remove('spin-animation');
+              const randomValue = getRandomValue();
+              slot.textContent = randomValue;
+              const slotName = slot.className.split(' ')[1];
+              const slotNum = slotName.replace('slot', '');
+              window[`slot${slotNum}`] = randomValue;
+          }
 
-      // Evaluate the slots to determine any winnings and apply the payout
-      const winnings = evalSlots();
-      winnings.forEach(symbol => {
-        renderPayout(symbol);
+          if (slotDup) {
+              slotDup.classList.remove('spin-animation');
+              slotDup.textContent = getRandomValue(); // Assuming you want a random value for the duplicate slot as well
+          }
       });
 
-      // Mark the end of spinning
+      coins -= bet;
+      evalSlots().forEach(symbol => renderPayout(symbol));
       isSpinning = false;
-      spinBtn.disabled = coins < bet || (coins === 0);
-      // Refresh the display to show the results
       render();
-  }, 2000);
+  }, 5000);
 }
 
 function render() {
-    
-    slotEls[0].textContent = slot1;
-    slotEls[1].textContent = slot4;
-    slotEls[2].textContent = slot7;
-    slotEls[3].textContent = slot2;
-    slotEls[4].textContent = slot5;
-    slotEls[5].textContent = slot8;
-    slotEls[6].textContent = slot3;
-    slotEls[7].textContent = slot6;
-    slotEls[8].textContent = slot9;
-    updateDisplay();
-    const output = evalSlots();
-    
+  let slotIndex = 1;
+  columns.forEach((column) => {
+      const slot = column.querySelector(`.slot.slot${slotIndex}`);
+      const slotDup = column.querySelector(`.slot.slot${slotIndex}-dup`);
+      
+      if (slot) slot.textContent = window[`slot${slotIndex}`];
+      if (slotDup) slotDup.textContent = window[`slot${slotIndex}`];
+      
+      slotIndex++;
+  });
+
+  updateDisplay();
 }
+
 function updateBetButtonStates() {
   decreaseBetBtn.classList.toggle("hidden", betIndex === 0);
   increaseBetBtn.classList.toggle("hidden", betIndex === betAmounts.length - 1);
 }
+
 function evalSlots() {
   let results = [];
-  switch (bet) {
-    case 1: 
-      results = basicHorizontalTest();
-      break;
-    case 5:
-      results = allHorizontalTest();
-      break;
-    case 20:
-      results = results.concat(verticalTest());
-      break;
-    case 40:
-      results = results.concat(diagonalTest());
-      break;
-  }
+  if (bet >= 1) results = results.concat(basicHorizontalTest());
+  if (bet >= 5) results = results.concat(allHorizontalTest());
+  if (bet >= 20) results = results.concat(verticalTest());
+  if (bet === 40) results = results.concat(diagonalTest());
   return results;
 }
 
-
 function basicHorizontalTest() {
   if (slot4 === slot5 && slot5 === slot6) return [slot4];
-  return []
+  return [];
 }
 
 function allHorizontalTest() {
@@ -182,51 +179,47 @@ function renderPayout(symbol) {
   if (symbol) {
     switch (symbol) {
       case '🍒':
-          coins += bet * 2;
-          break;
+        coins += bet * 2;
+        break;
       case '🍋':
-          coins += bet * 3;
-          break;
+        coins += bet * 3;
+        break;
       case '🍊':
-          coins += bet * 4;
-          break;
+        coins += bet * 4;
+        break;
       case '🍉':
-          coins += bet * 5;
-          break;
+        coins += bet * 5;
+        break;
       case '🍇':
-          coins += bet * 6;
-          break;
+        coins += bet * 6;
+        break;
       case '🍓':
-          coins += bet * 7;
-          break;
+        coins += bet * 7;
+        break;
       case '🍍':
-          coins += bet * 8;
-          break;
+        coins += bet * 8;
+        break;
       case '🥝':
-          coins += bet * 9;
-          break;
+        coins += bet * 9;
+        break;
       case '💎':
-          coins += bet * 10;
-          break;
+        coins += bet * 10;
+        break;
       case '7️⃣':
-          coins += bet * 15;
-          break;
-    } 
+        coins += bet * 15;
+        break;
+    }
     updateDisplay();
   }
 }
 
-
 function getRandomValue() {
-    const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '🍓', '🍍', '🥝', '💎', '7️⃣'];
-    return symbols[Math.floor(Math.random() * symbols.length)];
+  return SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
 }
+
 function toggleAudioPlayback() {
-  if (AUDIO.paused) {
-      AUDIO.play();
-  } else {
-      AUDIO.pause();    
-  }
+  if (AUDIO.paused) AUDIO.play();
+  else AUDIO.pause();
 }
 
 init();

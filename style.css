@@ -22,20 +22,36 @@ body {
 
 .slot-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
     gap: 10px;
     border: 5px solid salmon;
-    height: 300px;
+    height: 500px;
     border-radius: 15px;
     background: #F3F4F0;
 }
 
 .column {
+    position: relative;
     display: flex;
     flex-direction: column;
+    overflow: hidden; /* Hide the overflowing part of the spinning column */
+    height: 100%;
+    background-color: gray;
+    text-align: center;
+    font-size: 45px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
 }
 
 .slot {
+    height: 33.33%;
+    overflow: hidden;
     display: flex;
     flex: 1;
     align-items: center;
@@ -43,6 +59,18 @@ body {
     background-color: gray;
     text-align: center;
     font-size: 45px;
+}
+
+.slot, .slot-dup {
+    position: absolute; /* Absolute positioning */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.slot-dup {
+    display: none; /* Initially hide .slot-dup */
 }
 
 .container-buttons {
@@ -126,7 +154,20 @@ img {
 .hidden {
     display: none;
 }
+.box {
+    height: 33.33%; /* 1/3rd of the container height so only 3 slots are visible */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
 
+.boxes {
+    height: 300%; /* 3 times the height for spinning effect */
+    transition: transform 1s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
 .music {
     width: 200px;
     margin: auto;
@@ -192,7 +233,7 @@ img {
       background-position: 100% 100%;
     }
   }
-  /* @keyframes spin {
+   @keyframes spin {
     0% {
         transform: translateY(0);
     }
@@ -204,6 +245,6 @@ img {
     }
 }
 
-.slot.spin {
-    animation: spin 1s infinite; /* 1 second for each spin */
-/* }  */ 
+.spin-animation {
+    animation: spin 5s linear 1; /* 1 second for each spin */
+ }   
